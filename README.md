@@ -19,3 +19,7 @@
 
 ### 👉 [Try it out](https://voter.onrender.com)
 ### 👉 [Demo video](https://www.loom.com/share/12fde8de364f47a58ef26613d4235466)
+![admin](https://user-images.githubusercontent.com/88148077/214098858-9800814a-df38-466c-8133-30c1a787e585.png)
+![election](https://user-images.githubusercontent.com/88148077/214099240-a33fb0b4-92d3-4398-ad6a-59f7c0bb321b.png)
+![ballot](https://user-images.githubusercontent.com/88148077/214099426-ca2cc23b-4da4-4cd9-a85e-fedfa812fa07.png)
+![result](https://user-images.githubusercontent.com/88148077/214098454-b639c775-5a87-4bff-a880-cc95caec2523.png)
