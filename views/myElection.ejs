@@ -10,7 +10,7 @@
   </head>
   <body class="min-h-full bg-purple-200">
     <div
-      class="bg-gradient-to-r from-cyan-500 via-yellow-500 to-green-500 font-sans text-2xl shadow-md"
+      class="bg-gradient-to-r from-red-500 via-blue-500 to-pink-500 font-sans text-2xl shadow-md"
     >
       <h1 class="p-3.5 text-white"><%= election.title %></h1>
     </div>
@@ -42,7 +42,7 @@
           />
           <label
             for="<%= election.Questions[i].Answers[j].id %>"
-            class="flex-auto rounded-md shadow-sm bg-purple-300 peer-checked/<%= j %>:bg-pink-300 px-3 py-2 m-2 w-full"
+            class="flex-auto rounded-md shadow-sm bg-purple-500 peer-checked/<%= j %>:bg-pink-400 px-3 py-2 m-2 w-full"
           >
             <%= election.Questions[i].Answers[j].body %>
           </label>
@@ -51,7 +51,7 @@
         <% } %>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <input type="hidden" name="voterId" value="<%= voter.id %>" />
-        <button type="submit" class="rounded bg-indigo-400 hover:bg-cyan-500 p-2.6 mt-3.4 mr-4 text-white shadow-md cursor-pointer">Submit Choices</button>
+        <button type="submit" class="rounded bg-indigo-500 hover:bg-blue-500 p-2.6 mt-3.4 mr-4 text-white shadow-md cursor-pointer">Submit Choices</button>
     </form>
   </body>
 </html>

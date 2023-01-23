@@ -34,7 +34,7 @@
   </head>
   <body>
     <div
-      class="bg-gradient-to-r from-cyan-500 via-yellow-500 to-green-500 font-sans text-2xl shadow-md"
+      class="bg-gradient-to-r from-red-500 via-blue-500 to-pink-500 font-sans text-2xl shadow-md"
     >
       <div class="flex flex-row justify-between pr-4">
         <h1 class="w-3.2/5.4 p-3.5 text-white">Edit Question and answer options</h1>
@@ -75,7 +75,7 @@
       </div>
       <% } %>
       <div class="h-1/6 text-white">.</div>
-      <div class="shadow-xl p-3.5 mt-3.4 rounded-xl w-3.2/5.4 bg-purple-200">
+      <div class="shadow-xl p-3.5 mt-3.4 rounded-xl w-3.2/5.4 bg-indigo-200">
         <h1 class="text-2xl font-bold mb-4">Edit Question</h1>
         <form action="/questions/<%= question.id %>" method="post">
           <div class="flex-auto">
@@ -84,7 +84,7 @@
               type="text"
               name="title"
               id="title"
-              class="rounded w-full p-2.6 border-2 border-indigo-300"
+              class="rounded w-full p-2.6 border-2 border-blue-300"
               value="<%= question.title %>"
             />
           </div>
@@ -94,7 +94,7 @@
               type="text"
               name="description"
               id="description"
-              class="rounded w-full p-2.6 border-2 border-indigo-300"
+              class="rounded w-full p-2.6 border-2 border-cyan-300"
               value="<%= question.description %>"
             />
           </div>
@@ -106,7 +106,7 @@
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <div class="flex flex-row w-full justify-end px-2 py-4">
             <button
-              class="bg-pink-400 p-2.6 rounded m-2 hover:bg-green-500 text-white"
+              class="bg-yellow-400 p-2.6 rounded m-2 hover:bg-green-500 text-white"
               type="submit"
             >
               Save Changes
@@ -144,7 +144,7 @@
             <div class="flex flex-row mt-2">
               <button
                 type="submit"
-                class="bg-indigo-400 p-2.6 h-3/4 rounded hover:bg-cyan-500 text-white"
+                class="bg-indigo-400 p-2.6 h-3/4 rounded hover:bg-purple-500 text-white"
               >
                 Save
               </button>
