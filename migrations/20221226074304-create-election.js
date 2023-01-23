@@ -15,6 +15,14 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
+      customURL: {
+        type: Sequelize.STRING,
+        unique: true,
+      },
+      state: {
+        type: Sequelize.STRING,
+        defaultValue: "new",
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

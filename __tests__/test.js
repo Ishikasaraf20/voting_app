@@ -107,6 +107,7 @@ describe("Voting App", function () {
     res = await agent.post(`/questions/${id}`).send({
       title: "Updated Question",
       description: "Updated Description",
+      electionId: 1,
       _csrf: csrfToken,
     });
     expect(res.statusCode).toEqual(302);
@@ -121,5 +122,105 @@ describe("Voting App", function () {
     const updatedQuestion = questions[0];
     expect(updatedQuestion.title).toEqual("Updated Question");
     expect(updatedQuestion.description).toEqual("Updated Description");
+  });
+
+  test("Adding Option", async () => {
+    const agent = request.agent(server);
+    await login(agent, "user1@test.com", "password");
+    let res = await agent.get("/login");
+    const csrfToken = extractCsrfToken(res);
+    res = await agent.post("/answers/1").send({
+      body: "Test Option",
+      _csrf: csrfToken,
+      questionId: 1,
+    });
+    expect(res.statusCode).toBe(302);
+  });
+
+  test("Updating Option", async () => {
+    const agent = request.agent(server);
+    await login(agent, "user1@test.com", "password");
+    let res = await agent.get("/login");
+    const csrfToken = extractCsrfToken(res);
+    res = await agent.post("/answers/edit/1").send({
+      body: "Updated Option",
+      questionId: 1,
+      _csrf: csrfToken,
+    });
+    expect(res.statusCode).toBe(302);
+    const answers = await agent
+      .get("/questions/edit/1")
+      .set("Accept", "application/json")
+      .then((response) => {
+        const parsedResponse = JSON.parse(response.text);
+        return parsedResponse.answers;
+      });
+    const updatedAnswer = answers[0];
+    expect(updatedAnswer.body).toEqual("Updated Option");
+  });
+
+  test("Deleting Option", async () => {
+    const agent = request.agent(server);
+    await login(agent, "user1@test.com", "password");
+    let res = await agent.get("/login");
+    const csrfToken = extractCsrfToken(res);
+    res = await agent.delete("/answers/1").send({
+      _csrf: csrfToken,
+    });
+    const parsedResponse = JSON.parse(res.text);
+    expect(parsedResponse.success).toBe(true);
+  });
+
+  test("Deleting Question", async () => {
+    const agent = request.agent(server);
+    await login(agent, "user1@test.com", "password");
+    let res = await agent.get("/login");
+    let csrfToken = extractCsrfToken(res);
+    res = await agent.post("/questions").send({
+      title: "Test Question 2",
+      description: "Test Description 2",
+      electionId: 1,
+      _csrf: csrfToken,
+    });
+    res = await agent.delete("/questions/1").send({
+      _csrf: csrfToken,
+    });
+    const parsedResponse = JSON.parse(res.text);
+    expect(parsedResponse.success).toBe(true);
+  });
+
+  test("Deleting Election", async () => {
+    const agent = request.agent(server);
+    await login(agent, "user1@test.com", "password");
+    let res = await agent.get("/login");
+    const csrfToken = extractCsrfToken(res);
+    res = await agent.delete("/elections/1").send({
+      _csrf: csrfToken,
+    });
+    const parsedResponse = JSON.parse(res.text);
+    expect(parsedResponse.success).toBe(true);
+  });
+
+  test("Adding voter", async () => {
+    const agent = request.agent(server);
+    await login(agent, "user1@test.com", "password");
+    let res = await agent.get("/login");
+    let csrfToken = extractCsrfToken(res);
+    await agent.post("/elections").send({
+      title: "Test Election",
+      description: "Test Description",
+      _csrf: csrfToken,
+    });
+    res = await agent.get("/login");
+    csrfToken = extractCsrfToken(res);
+    res = await agent.post("/voters").send({
+      firstName: "Test",
+      lastName: "Voter",
+      voterID: "123456789",
+      password: "password",
+      _csrf: csrfToken,
+      electionId: 2,
+    });
+    expect(res.statusCode).toBe(302);
   });
 });

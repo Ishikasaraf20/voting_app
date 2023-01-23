@@ -7,63 +7,73 @@
     <meta name="csrf-token" content="<%= csrfToken %>" />
     <link rel="stylesheet" href="./css/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Sign up Pages</title>
+    <title>Sign up</title>
   </head>
 
   <body>
-    <div class="bg-blue-400 font-sans text-2xl">
+    <div class="bg-gradient-to-r from-cyan-500 via-yellow-500 to-green-500 font-sans text-2xl">
       <div class="flex flex-row justify-between pr-4">
-        <h1 class="w-3/5 p-5 text-white">New here, Sign-up</h1>
+        <h1 class="w-3.2/5.4 p-3.5 text-white">New here, Sign-up</h1>
       </div>
     </div>
-    <div class="grid grid-cols-6 p-3 gap-2">
-      <div class="col-start-3 col-span-2">
+    <div class="flex flex-col items-center">
+      <div class="h-1/6 text-white">.</div>
+      <img src="assets/img/user-account.png" alt="user-account" class="w-1/12" />
+      <div class="w-1/3 shadow-xl p-3.5 mt-3.4 rounded-md bg-purple-200">
         <form action="/admins" method="post">
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <div class="py-3">
-            <label for="firstName">Enter First name</label>
+            <label for="firstName">First name</label>
             <input
               name="firstName"
               type="text"
-              class="rounded border-2 border-gray-500 p-2 w-full text-gray-900"
+              required
+              class="rounded border-2 border-gray-500 p-2.6 w-full text-gray-900"
             />
           </div>
           <div class="py-3">
-            <label for="lastName">Enter Last name</label>
+            <label for="lastName">Last name</label>
             <input
               name="lastName"
               type="text"
-              class="rounded border-2 border-gray-500 p-2 w-full text-gray-900"
+              class="rounded border-2 border-gray-500 p-2.6 w-full text-gray-900"
             />
           </div>
           <div class="py-3">
-            <label for="email">Enter Email</label>
+            <label for="email">Email</label>
             <input
               name="email"
               type="email"
-              class="rounded border-2 border-gray-500 p-2 w-full text-gray-900"
+              required
+              class="rounded border-2 border-gray-500 p-2.6 w-full text-gray-900"
             />
           </div>
           <div class="py-3">
-            <label for="password">Enter Password</label>
+            <label for="password">Password</label>
             <input
               name="password"
               type="password"
-              class="rounded border-2 border-gray-500 p-2 w-full text-gray-900"
+              required
+              class="rounded border-2 border-gray-500 p-2.6 w-full text-gray-900"
             />
           </div>
           <div class="py-3 flex flex-row">
             <button
               type="submit"
-              class="py-2 px-6 rounded font-medium bg-violet-500 hover:bg-blue-600"
+              class="py-2 px-6 rounded font-medium bg-cyan-500 hover:bg-indigo-600"
             >
               Sign Up
             </button>
             <p class="py-2 px-4">
-              Already a member? <a href="/login">Sign-in</a>
+              Already a member? <a href="/login" class="text-green-500">&nbsp; Sign-in</a>
             </p>
           </div>
         </form>
+        <% if(messages && messages.error && messages.error.length > 0)  { %>
+          <% for(var i=0; i<messages.error.length; i++) { %>
+            <%- include('error', {message: messages.error[i]}) %>
+          <% } %>
+        <% } %>
       </div>
     </div>
   </body>

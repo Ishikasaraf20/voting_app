@@ -12,13 +12,16 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "electionId",
         onDelete: "cascade",
         onUpdate: "cascade",
-        hooks: true,
+      });
+      Election.hasMany(models.Voter, {
+        foreignKey: "electionId",
+        onDelete: "cascade",
+        onUpdate: "cascade",
       });
       Election.belongsTo(models.Admin, {
         foreignKey: "adminId",
         onDelete: "cascade",
         onUpdate: "cascade",
-        hooks: true,
       });
     }
   }
@@ -26,17 +29,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       title: DataTypes.STRING,
       description: DataTypes.STRING,
+      customURL: DataTypes.STRING,
+      state: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: "Election",
-      hooks: {
-        beforeDestroy: async (election, options) => {
-          await sequelize.models.Question.destroy({
-            where: { electionId: election.id },
-          });
-        },
-      },
     }
   );
   return Election;

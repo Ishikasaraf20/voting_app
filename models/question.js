@@ -13,13 +13,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "questionId",
         onDelete: "cascade",
         onUpdate: "cascade",
-        hooks: true,
       });
       Question.belongsTo(models.Election, {
         foreignKey: "electionId",
         onDelete: "cascade",
         onUpdate: "cascade",
-        hooks: true,
       });
     }
   }
@@ -27,19 +25,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       title: DataTypes.STRING,
       description: DataTypes.STRING,
-      selected: DataTypes.INTEGER,
-      correct: DataTypes.INTEGER,
     },
     {
       sequelize,
       modelName: "Question",
-      hooks: {
-        beforeDestroy: async (question, options) => {
-          await sequelize.models.Answer.destroy({
-            where: { questionId: question.id },
-          });
-        },
-      },
     }
   );
   return Question;
